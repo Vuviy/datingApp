@@ -31,11 +31,11 @@
                     @else
                         @if(!auth()->user()->name)
                             <li class="nav-item">
-                                <p class="nav-link" >{{auth()->user()->email}}</p>
+                                <a class="nav-link" href="{{route('profile')}}" >{{auth()->user()->email}}</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <p class="nav-link" >{{auth()->user()->name}}</p>
+                                <a class="nav-link" href="{{route('profile')}}" >{{auth()->user()->name}}</a>
                             </li>
                         @endif
                         <form method="POST" action="{{ route('logout') }}">

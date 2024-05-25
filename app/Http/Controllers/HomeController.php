@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class Home extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
