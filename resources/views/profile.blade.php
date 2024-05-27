@@ -2,7 +2,7 @@
 @extends('layouts.base')
 
 @section('content')
-<main class="container my-5">
+<main class="container my-5" style="display: block">
     <!-- Основний контент -->
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -55,5 +55,80 @@
             </div>
         </div>
     </div>
+    <div class="container mt-5">
+{{--        <div class="container row justify-content-center">--}}
+{{--            <h1>Interests</h1>--}}
+{{--            <form action="{{ route('interests.store') }}" method="POST">--}}
+{{--                @csrf--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="name">Interest Name</label>--}}
+{{--                    <input type="text" name="name" id="name" class="form-control" required>--}}
+{{--                </div>--}}
+{{--                <button type="submit" class="btn btn-primary">Add Interest</button>--}}
+{{--            </form>--}}
+
+{{--            <ul>--}}
+{{--                @foreach($interests as $interest)--}}
+{{--                    <li>{{ $interest->name }}</li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+
+        <div class="container">
+            <h1>{{ $user->name }}'s Profile</h1>
+
+            <h2>Interests</h2>
+            <form action="{{ route('users.interests.add', $user) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="interest_name">Add Interest</label>
+                    <input type="text" name="name" id="interest_name" class="form-control" autocomplete="off">
+                    <input type="hidden" name="interest_id" id="interest_id">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Interest</button>
+            </form>
+
+            <ul>
+                @foreach($user->interests as $interest)
+                    <li>{{ $interest->name }}
+                        <form action="{{ route('users.interests.detach', $user) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="interest_id" value="{{ $interest->id }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+
+    </div>
 </main>
+@endsection
+
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#interest_name').autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "{{ route('interests.autocomplete') }}",
+                        data: {
+                            term: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                        }
+                    });
+                },
+                select: function(event, ui) {
+                    $('#interest_name').val(ui.item.value);
+                    $('#interest_id').val(ui.item.id);
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection

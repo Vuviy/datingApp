@@ -6,6 +6,7 @@
     <title>Badoost</title>
     <!-- Підключення стилів Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
         /* Стилі для забезпечення, щоб футер був внизу */
@@ -23,7 +24,46 @@
             align-items: center;
         }
     </style>
+    <style>
+        .custom-btn {
+            display: inline-block;
+            padding: 30px 60px; /* Збільшення розміру кнопок */
+            font-size: 36px; /* Збільшення розміру тексту */
+            font-weight: bold;
+            text-align: center;
+            /*border: 2px solid black;*/
+            /*border-radius: 10px;*/
+            transition: box-shadow 0.2s, background-color 0.2s;
+            color: black;
+            text-decoration: none;
+        }
 
+        .custom-btn:hover {
+            box-shadow: 15px 10px 10px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        .btn-people {
+            background-color: #0d81ea;
+            color: black;
+        }
+
+        .btn-request {
+            background-color: #af0c54;
+            color: black;
+        }
+        .btn-people:hover {
+            background-color: #0e97d5;
+        }
+        .btn-request:hover {
+            background-color: #d52573;
+        }
+        .button-container {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+        }
+    </style>
 </head>
 <body>
     <!-- Хедер -->
@@ -39,5 +79,12 @@
 {{--    <!-- Підключення скриптів Bootstrap 5 -->--}}
 {{--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>--}}
 {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>--}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Інші скрипти -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @yield('scripts')
 </body>
 </html>

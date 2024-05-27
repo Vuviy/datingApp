@@ -35,10 +35,20 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
     Route::post('/edit', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('edit_profile');
 
+
 });
 
-//Route::get('/login', [AuthController::class, 'loginForm'])->name('loginForm');
-//Route::post('/login', [AuthController::class, 'login'])->name('login');
-//Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');
-//Route::post('/register', [AuthController::class, 'register'])->name('register');
-//Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+
+use App\Http\Controllers\InterestController;
+
+//Route::get('interests', [InterestController::class, 'index'])->name('interests.index');
+//Route::post('interests', [InterestController::class, 'store'])->name('interests.store');
+//Route::post('users/{user}/interests', [InterestController::class, 'attach'])->name('users.interests.attach');
+Route::post('users/{user}/interests', [InterestController::class, 'addInterest'])->name('users.interests.add');
+Route::delete('users/{user}/interests', [InterestController::class, 'detach'])->name('users.interests.detach');
+
+
+Route::get('interests/autocomplete', [InterestController::class, 'autocomplete'])->name('interests.autocomplete');
