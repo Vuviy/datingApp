@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+
 {{--        <div class="container row justify-content-center">--}}
 {{--            <h1>Interests</h1>--}}
 {{--            <form action="{{ route('interests.store') }}" method="POST">--}}
@@ -75,8 +75,8 @@
 {{--        </div>--}}
 
         <div class="container">
-            <h1>{{ $user->name }}'s Profile</h1>
-
+            <div class="row justify-content-center">
+                <div class="col-md-6">
             <h2>Interests</h2>
             <form action="{{ route('users.interests.add', $user) }}" method="POST">
                 @csrf
@@ -101,9 +101,11 @@
                 @endforeach
             </ul>
         </div>
+        </div>
+        </div>
 
 
-    </div>
+
 </main>
 @endsection
 

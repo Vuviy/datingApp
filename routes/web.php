@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
 use \App\Http\Controllers\HomeController;
+use App\Http\Controllers\InterestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +41,9 @@ Route::middleware(['auth'])->group(function (){
 
 
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/users/{user}/user-profile', [HomeController::class, 'userProfile'])->name('userProfile');
 
 
-use App\Http\Controllers\InterestController;
 
 //Route::get('interests', [InterestController::class, 'index'])->name('interests.index');
 //Route::post('interests', [InterestController::class, 'store'])->name('interests.store');
