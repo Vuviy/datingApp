@@ -29,6 +29,9 @@
                             <a class="nav-link" href="{{route('registerForm')}}">Register</a>
                         </li>
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('allChats')}}">Chats</a>
+                        </li>
                         @if(!auth()->user()->name)
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('profile')}}" >{{auth()->user()->email}}</a>

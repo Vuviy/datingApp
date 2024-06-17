@@ -8,7 +8,7 @@
                     <div class="col-md-3">
                         <label for="category" class="form-label">Стать</label>
                         <select id="category" name="gender" class="form-select">
-                            <option selected disabled>---</option>
+                            <option selected value="all" >All</option>
                             <option {{request('gender') == 'male' ? 'selected' : '' }} value="male">Мужики</option>
                             <option {{request('gender') == 'female' ? 'selected' : '' }} value="female">Тьолки</option>
                         </select>
@@ -45,9 +45,9 @@
         <div class="mt-3">
             <h2 class="mb-5">Результати пошуку</h2>
             @foreach($peoples as $people)
-            <div class="result-card d-flex" style="height: 200px; margin-bottom: 20px">
+            <div class="result-card d-flex" style="height: 200px; margin-bottom: 20px; width: 400px;">
                 <a href="{{route('userProfile', $people)}}">
-                    <img  src="https://pbs.twimg.com/profile_images/1221735342937645067/MGMXudrc_400x400.jpg" alt="Фото профілю" style="max-height: 100%">
+                    <img  src="{{$people->gender != 'female' ? 'https://th-thumbnailer.cdn-si-edu.com/5a79C6jJ8BrChMX5tgEKiMI_qqo=/1000x750/filters:no_upscale():focal(792x601:793x602)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/52/e4/52e44474-c2dc-41e0-bb77-42a904695196/this-image-shows-a-portrait-of-dragon-man-credit-chuang-zhao_web.jpg' : 'https://pbs.twimg.com/profile_images/1221735342937645067/MGMXudrc_400x400.jpg'}}" alt="Фото профілю" style="height: 200px; width: 200px">
                 </a>
                     <div class="info" style="margin-left: 20px">
                         <a href="{{route('userProfile', $people)}}" style="text-decoration: none; color: black">

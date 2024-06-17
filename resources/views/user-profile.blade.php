@@ -9,8 +9,12 @@
             <div class="col-md-3">
                 <img  src="https://pbs.twimg.com/profile_images/1221735342937645067/MGMXudrc_400x400.jpg" alt="{{ $user->name }}" class="img-fluid rounded-circle mb-3">
             </div>
-            <div class="col-md-9">
-                <h1>{{ $user->name }}</h1>
+            <div class="col-md-8">
+                <div class="d-flex">
+                    <h1 style="margin-right: 50px">{{ $user->name }}</h1>
+
+                    <a href="#" class="btn btn-primary text-uppercase" style="width: 100px; line-height: 50px; font-size: 20px">write</a>
+                </div>
 {{--                <p>{{ $user->bio }}</p>--}}
                 <p>Вік: {{ $user->age }}</p>
                 <p>Стать: {{ $user->gender }}</p>
@@ -24,12 +28,10 @@
 
                 <h3>Contact Information</h3>
                 <p>Email: {{ $user->email }}</p>
-                <!-- Додати більше контактної інформації за потреби -->
 
-<!-- Додати більше деталей профілю за потреби -->
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
 
 

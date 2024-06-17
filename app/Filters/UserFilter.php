@@ -7,7 +7,11 @@ class UserFilter extends QueryFilter
 
     public function gender($value)
     {
-        return $this->builder->where('gender', $value);
+        if($value != 'all')
+        {
+            return $this->builder->where('gender', $value);
+        }
+        return $this->builder;
     }
 
     public function age_from($value = 0)
