@@ -82,7 +82,16 @@
                                                                    role="tab" aria-selected="false" tabindex="-1">
                                                                     <div class="d-flex">
                                                                         <div
-                                                                            class="flex-shrink-0 avatar avatar-story me-2 status-online">
+                                                                            class="flex-shrink-0 avatar avatar-story me-2
+                                                                             @if(auth()->id() == $chat->recipient_id)
+                                                                               @if($chat->sender->online)
+                                                                                  status-online
+                                                                               @endif
+                                                                               @else
+                                                                               @if($chat->recipient->online)
+                                                                                  status-online
+                                                                               @endif
+@endif">
                                                                             <img class="avatar-img rounded-circle"
                                                                                  src="" alt="">
                                                                         </div>
@@ -94,7 +103,8 @@
                                                                                     {{$chat->recipient->name}}
                                                                                 @endif
                                                                             </h6>
-                                                                            <div class="small text-secondary">{{$chat->lastMessage->body}}</div>
+                                                                            <div
+                                                                                class="small text-secondary">{{$chat->lastMessage->body}}</div>
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -339,10 +349,10 @@
                         }, 100); // Невелика затримка для забезпечення оновлення DOM
 
 
-                        // if (messageContainer) {
-                        //     const lastMessage = messageContainer.lastElementChild;
-                        //     lastMessage.lastElementChild.scrollIntoView({behavior: 'smooth'});
-                        // }
+// if (messageContainer) {
+//     const lastMessage = messageContainer.lastElementChild;
+//     lastMessage.lastElementChild.scrollIntoView({behavior: 'smooth'});
+// }
                         inputElement.value = hrefValue;
                     });
                 });
@@ -371,16 +381,16 @@
                         messageDiv.classList.add('text-end');
                         messageDiv.classList.add('mb-1');
                         messageDiv.innerHTML = `
-                                    <div class="w-100">
-                                        <div class="d-flex flex-column align-items-end">
-                                            <div class="bg-primary text-white p-2 px-3 rounded-2">${response.data.body}</div>
-                                            <div class="d-flex my-2">
-                                                <div class="small text-secondary">${response.data.time}</div>
-                                                <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
-                                            </div>
-                                        </div>
-                                </div>
-                            `;
+<div class="w-100">
+<div class="d-flex flex-column align-items-end">
+<div class="bg-primary text-white p-2 px-3 rounded-2">${response.data.body}</div>
+<div class="d-flex my-2">
+<div class="small text-secondary">${response.data.time}</div>
+<div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
+</div>
+</div>
+</div>
+`;
 
                         messageContainer.appendChild(messageDiv);
                         messageDiv.scrollIntoView({behavior: 'smooth'});
@@ -398,7 +408,7 @@
 
                     const hrefValue = link.getAttribute('href').substring(6);
 
-                    window.Echo.private('__store_message.' + hrefValue).listen('.__store_message', response => {
+                    window.Echo.private('store_message.' + hrefValue).listen('.store_message', response => {
 
                         const messageContainer = document.querySelector('.message_container_' + hrefValue);
 
@@ -407,14 +417,14 @@
                         messageDiv.classList.add('mb-1');
 
                         messageDiv.innerHTML = `
-                            <div class="flex-grow-1">
-                            <div class="w-100">
-                                <div class="d-flex flex-column align-items-start">
-                                    <div class="bg-light text-secondary p-2 px-3 rounded-2">${response.body}</div>
-                                    <div class="small my-2">${response.time}</div>
-                                </div>
-                            </div>
-                            </div>`;
+<div class="flex-grow-1">
+<div class="w-100">
+<div class="d-flex flex-column align-items-start">
+<div class="bg-light text-secondary p-2 px-3 rounded-2">${response.body}</div>
+<div class="small my-2">${response.time}</div>
+</div>
+</div>
+</div>`;
 
                         messageContainer.appendChild(messageDiv);
 

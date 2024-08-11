@@ -19,9 +19,17 @@ use Illuminate\Support\Facades\Log;
 //});
 
 
-Broadcast::channel('__store_message.{chat_id}', function ($user, $chatId) {
+Broadcast::channel('store_message.{chat_id}', function ($user, $chatId) {
 //    return (int) $user->id === (int) $id;
 
 //    return 0;
     return $user->chats()->where('id', $chatId)->count();
 });
+
+
+//Broadcast::channel('online_status.{user_id}', function ($user, $chatId) {
+////    return (int) $user->id === (int) $id;
+//
+////    return 0;
+//    return $user->chats()->where('id', $chatId)->count();
+//});

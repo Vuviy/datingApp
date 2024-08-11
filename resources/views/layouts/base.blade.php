@@ -10,6 +10,7 @@
 {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
     <style>
@@ -69,92 +70,6 @@
         }
     </style>
 
-
-
-
-    @if(url()->current() == 'http://datingapp/chats')
-{{--          <style>--}}
-{{--              body {--}}
-{{--                  background-color: #121212;--}}
-{{--                  color: #ffffff;--}}
-{{--              }--}}
-{{--              .chat-container {--}}
-{{--                  height: 90vh;--}}
-{{--              }--}}
-{{--              .chat-list {--}}
-{{--                  background-color: #1e1e1e;--}}
-{{--                  padding: 10px;--}}
-{{--                  height: 100%;--}}
-{{--                  overflow-y: auto;--}}
-{{--              }--}}
-{{--              .chat-messages {--}}
-{{--                  height: 100%;--}}
-{{--                  display: flex;--}}
-{{--                  flex-direction: column;--}}
-{{--                  justify-content: space-between;--}}
-{{--              }--}}
-{{--              .messages-wrapper {--}}
-{{--                  height: calc(100% - 60px); /* Adjusted height */--}}
-{{--                  overflow-y: auto;--}}
-{{--              }--}}
-{{--              .message-box {--}}
-{{--                  background-color: #2a2a2a;--}}
-{{--                  border-radius: 5px;--}}
-{{--                  padding: 10px;--}}
-{{--                  margin-bottom: 10px;--}}
-{{--                  width: fit-content;--}}
-{{--                  color: #ffffff;--}}
-{{--              }--}}
-{{--              .message-box.sent {--}}
-{{--                  background-color: #0d6efd;--}}
-{{--                  align-self: flex-end;--}}
-{{--              }--}}
-{{--              .message-input {--}}
-{{--                  background-color: #1e1e1e;--}}
-{{--                  border: none;--}}
-{{--                  color: #ffffff;--}}
-{{--              }--}}
-{{--              .message-input:focus {--}}
-{{--                  box-shadow: none;--}}
-{{--                  border-color: #0d6efd;--}}
-{{--              }--}}
-{{--              .chat-header {--}}
-{{--                  background-color: #1e1e1e;--}}
-{{--                  padding: 10px;--}}
-{{--              }--}}
-{{--              .chat-search {--}}
-{{--                  background-color: #2a2a2a;--}}
-{{--                  border: none;--}}
-{{--                  color: #ffffff;--}}
-{{--              }--}}
-{{--              .chat-search:focus {--}}
-{{--                  box-shadow: none;--}}
-{{--                  border-color: #0d6efd;--}}
-{{--              }--}}
-{{--              .active-chat {--}}
-{{--                  background-color: #0d6efd;--}}
-{{--                  color: #ffffff;--}}
-{{--              }--}}
-{{--              .chat-user {--}}
-{{--                  display: flex;--}}
-{{--                  align-items: center;--}}
-{{--                  margin-bottom: 15px;--}}
-{{--              }--}}
-{{--              .chat-user img {--}}
-{{--                  border-radius: 50%;--}}
-{{--                  margin-right: 10px;--}}
-{{--              }--}}
-{{--              .chat-user .status-dot {--}}
-{{--                  height: 10px;--}}
-{{--                  width: 10px;--}}
-{{--                  background-color: #0d6efd;--}}
-{{--                  border-radius: 50%;--}}
-{{--                  display: inline-block;--}}
-{{--                  margin-right: 5px;--}}
-{{--              }--}}
-{{--          </style>--}}
-
-    @endif
 </head>
 <body>
     <!-- Хедер -->
@@ -190,5 +105,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @yield('scripts')
+
+
+<script>
+
+
+</script>
 </body>
 </html>

@@ -35,7 +35,6 @@ class ChatController extends Controller
     public function send_message(Request $request)
     {
 
-
         if ($request->body){
 
             $message = Message::query()->create([
@@ -46,22 +45,13 @@ class ChatController extends Controller
 
             $message->chat()->update(['id' => $request->chat_id]);
 
-//            return redirect()->route('allChats')->with('chat_id', $request->chat_id);
-//            return redirect()->route('allChats')->with('chat_id', $request->chat_id);
-
-
-//            dd($message);
-
             broadcast(new StoreMessageEvent($message))->toOthers();
-
-//            \Carbon\Carbon::createFromTimeStamp(strtotime($message->created_at))->diffForHumans()
 
         return response()->json(['body' => $message->body, 'time' => $message->created_at->diffForHumans()]);
         }
 
         return response()->json(['error' => 'body empty']);
 
-//        return redirect()->route('allChats')->with('chat_id', $request->chat_id);
     }
 
     public function oldChats()

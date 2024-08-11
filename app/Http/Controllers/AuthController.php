@@ -19,17 +19,16 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
 
-        // Перевірка облікових даних
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Аутентифікація успішна
             $request->session()->regenerate();
 
+            \auth()->user()->update(['online' => 1]);
+//            $user->update(['online' => 1]);
             return redirect()->intended();
         }
 
-        // Аутентифікація не вдалася
         return back()->withErrors([
             'email' => 'Неправильна електронна пошта або пароль.',
         ])->onlyInput('email');
@@ -55,6 +54,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        \auth()->user()->update(['online' => 0]);
+
         Auth::logout();
 
         $request->session()->invalidate();

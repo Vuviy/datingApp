@@ -40,7 +40,7 @@ class StoreMessageEvent implements ShouldBroadcast
 //        return new Channel('store_message');
 //        return new Channel('store_message_'.$this->chat_id);
 //        return new PrivateChannel('__store_message.'.'1');
-        return new PrivateChannel('__store_message.'.$this->message->chat->id);
+        return new PrivateChannel('store_message.'.$this->message->chat->id);
     }
 
 
@@ -51,7 +51,7 @@ class StoreMessageEvent implements ShouldBroadcast
      */
     public function broadcastAs()
     {
-        return '__store_message';
+        return 'store_message';
     }
 
     /**

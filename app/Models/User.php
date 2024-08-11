@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'gender',
         'age',
+        'online',
     ];
 
     public function interests():BelongsToMany
@@ -50,11 +51,6 @@ class User extends Authenticatable
         $chats2 = $this->hasMany(Chat::class, 'recipient_id')->get();
 
         $marged = $chats1->merge($chats2);
-
-//        dd($marged->sortByDesc('updated_at'));
-//
-//        dd($this->hasMany(Chat::class));
-
 
         return $marged->sortByDesc('updated_at');
     }
