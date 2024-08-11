@@ -1,4 +1,4 @@
-<header class="bg-primary text-white text-center py-3">
+<header class="bg-primary text-white text-center py-3" style="height: auto">
     <h1>Badoost</h1>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">

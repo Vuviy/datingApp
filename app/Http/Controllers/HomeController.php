@@ -40,4 +40,5 @@ class HomeController extends Controller
 //        dd(23423);
         return view('user-profile', compact('user'));
     }
+
 }

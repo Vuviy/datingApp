@@ -39,55 +39,88 @@
                             <div class="mt-4 h-100">
                                 <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
                                     <ul class="nav flex-column nav-pills nav-pills-soft" role="tablist">
-                                        <li data-bs-dismiss="offcanvas">
-                                            <!-- Chat user tab item -->
-                                            <a href="#chat-1" class="nav-link text-start" id="chat-1-tab"
-                                               data-bs-toggle="pill" role="tab" aria-selected="true">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
-                                                        <img class="avatar-img rounded-circle"
-                                                             src="https://via.placeholder.com/40" alt="">
-                                                    </div>
-                                                    <div class="flex-grow-1 d-block">
 
-                                                        <h6 class="mb-0 mt-1">Frances Guerrero</h6>
-                                                        <div class="small text-secondary">Frances sent a photo.</div>
+
+                                        @foreach($chats as $chat)
+
+                                            <li data-bs-dismiss="offcanvas">
+                                                <!-- Chat user tab item -->
+                                                <a href="#chat-1" class="nav-link text-start" id="chat-{{$chat->id}}-tab"
+                                                   data-bs-toggle="pill" role="tab" aria-selected="true">
+                                                    <div class="d-flex">
+                                                        <div class="flex-shrink-0 avatar avatar-story me-2 status-online">
+                                                            <img class="avatar-img rounded-circle"
+                                                                 src="https://via.placeholder.com/40" alt="">
+                                                        </div>
+                                                        <div class="flex-grow-1 d-block">
+                                                            <h6 class="mb-0 mt-1">
+                                                                @if(auth()->id() == $chat->recipient_id)
+                                                                   {{$chat->sender->name}}
+                                                                @else
+                                                                    {{$chat->recipient->name}}
+                                                                @endif
+                                                            </h6>
+                                                            <div class="small text-secondary">{{$chat->body}}</div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- Chat user tab item -->
-                                        <li data-bs-dismiss="offcanvas">
-                                            <a href="#chat-2" class="nav-link text-start" id="chat-2-tab"
-                                               data-bs-toggle="pill" role="tab" aria-selected="false" tabindex="-1">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 avatar me-2 status-offline">
-                                                        <img class="avatar-img rounded-circle"
-                                                             src="https://via.placeholder.com/40" alt="">
-                                                    </div>
-                                                    <div class="flex-grow-1 d-block">
-                                                        <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>
-                                                        <div class="small text-secondary">You missed a call form</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- Chat user tab item -->
-                                        <li data-bs-dismiss="offcanvas">
-                                            <a href="#chat-3" class="nav-link text-start" id="chat-3-tab"
-                                               data-bs-toggle="pill" role="tab" aria-selected="false" tabindex="-1">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 avatar avatar-story me-2">
-                                                        <img class="avatar-img rounded-circle"
-                                                             src="https://via.placeholder.com/40" alt="">
-                                                    </div>
-                                                    <div class="flex-grow-1 d-block">
-                                                        <h6 class="mb-0 mt-1">Billy Vasquez</h6>
-                                                        <div class="small text-secondary">Day sweetness</div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
+                                                </a>
+                                            </li>
+
+                                        @endforeach
+
+
+{{--                                        <li data-bs-dismiss="offcanvas">--}}
+{{--                                            <!-- Chat user tab item -->--}}
+{{--                                            <a href="#chat-1" class="nav-link text-start" id="chat-1-tab"--}}
+{{--                                               data-bs-toggle="pill" role="tab" aria-selected="true">--}}
+{{--                                                <div class="d-flex">--}}
+{{--                                                    <div class="flex-shrink-0 avatar avatar-story me-2 status-online">--}}
+{{--                                                        <img class="avatar-img rounded-circle"--}}
+{{--                                                             src="https://via.placeholder.com/40" alt="">--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1 d-block">--}}
+
+{{--                                                        <h6 class="mb-0 mt-1">Frances Guerrero</h6>--}}
+{{--                                                        <div class="small text-secondary">Frances sent a photo.</div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+
+
+
+{{--                                        <!-- Chat user tab item -->--}}
+{{--                                        <li data-bs-dismiss="offcanvas">--}}
+{{--                                            <a href="#chat-2" class="nav-link text-start" id="chat-2-tab"--}}
+{{--                                               data-bs-toggle="pill" role="tab" aria-selected="false" tabindex="-1">--}}
+{{--                                                <div class="d-flex">--}}
+{{--                                                    <div class="flex-shrink-0 avatar me-2 status-offline">--}}
+{{--                                                        <img class="avatar-img rounded-circle"--}}
+{{--                                                             src="https://via.placeholder.com/40" alt="">--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1 d-block">--}}
+{{--                                                        <h6 class="mb-0 mt-1">Carolyn Ortiz</h6>--}}
+{{--                                                        <div class="small text-secondary">You missed a call form</div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+{{--                                        <!-- Chat user tab item -->--}}
+{{--                                        <li data-bs-dismiss="offcanvas">--}}
+{{--                                            <a href="#chat-3" class="nav-link text-start" id="chat-3-tab"--}}
+{{--                                               data-bs-toggle="pill" role="tab" aria-selected="false" tabindex="-1">--}}
+{{--                                                <div class="d-flex">--}}
+{{--                                                    <div class="flex-shrink-0 avatar avatar-story me-2">--}}
+{{--                                                        <img class="avatar-img rounded-circle"--}}
+{{--                                                             src="https://via.placeholder.com/40" alt="">--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1 d-block">--}}
+{{--                                                        <h6 class="mb-0 mt-1">Billy Vasquez</h6>--}}
+{{--                                                        <div class="small text-secondary">Day sweetness</div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
                                     </ul>
                                 </div>
                             </div>
@@ -101,9 +134,17 @@
                         <div class="card card-chat rounded-start-lg-0 border-start-lg-0">
                             <div class="card-body h-100">
                                 <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
+
+
+
+
+                                    @foreach($chats as $chat)
+
+
+
                                     <!-- Conversation item START -->
-                                    <div class="fade tab-pane show active h-100" id="chat-1" role="tabpanel"
-                                         aria-labelledby="chat-1-tab">
+                                    <div class="fade tab-pane show active h-100" id="chat-{{$chat->id}}" role="tabpanel"
+                                         aria-labelledby="chat-{{$chat->id}}-tab">
                                         <!-- Top avatar and status START -->
                                         <div class="d-sm-flex justify-content-between align-items-center">
                                             <div class="d-flex mb-2 mb-sm-0">
@@ -112,7 +153,15 @@
                                                          src="https://via.placeholder.com/40" alt="">
                                                 </div>
                                                 <div class="d-block flex-grow-1">
-                                                    <h6 class="mb-0 mt-1">Judy Nguyen</h6>
+                                                    <h6 class="mb-0 mt-1">
+
+                                                        @if(auth()->id() == $chat->recipient_id)
+                                                            {{$chat->sender->name}}
+                                                        @else
+                                                            {{$chat->recipient->name}}
+                                                        @endif
+
+                                                    </h6>
                                                     <div class="small text-secondary"><i
                                                             class="fa-solid fa-circle text-success me-1"></i>Online
                                                     </div>
@@ -162,6 +211,11 @@
                                         </div>
                                         <!-- Top avatar and status END -->
                                         <hr>
+
+
+
+
+                                        @foreach()
                                         <!-- Chat conversation START -->
                                         <div
                                             class="chat-conversation-content custom-scrollbar os-host os-theme-dark os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
@@ -184,25 +238,44 @@
                                                          style="padding: 0px; width: 100%; height: 100%; overflow-y: scroll;">
                                                         <!-- Chat time -->
                                                         <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-1">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-2 px-3 rounded-2">
-                                                                            Applauded no discovery in newspaper
-                                                                            allowance am northward😊
+
+
+
+                                                        @if(auth()->id() !== $chat->recipient_id)
+
+                                                            <!-- Chat message left -->
+                                                            <div class="d-flex mb-1">
+                                                                {{--  <div class="flex-shrink-0 avatar avatar-xs me-2">--}}
+                                                                {{--  <img class="avatar-img rounded-circle"--}}
+                                                                {{--src="https://via.placeholder.com/40" alt="">--}}
+                                                                {{--</div>--}}
+                                                                <div class="flex-grow-1">
+                                                                    <div class="w-100">
+                                                                        <div class="d-flex flex-column align-items-start">
+                                                                            <div
+                                                                                class="bg-light text-secondary p-2 px-3 rounded-2">
+
+                                                                            </div>
+                                                                            <div class="small my-2">6:15 AM</div>
                                                                         </div>
-                                                                        <div class="small my-2">6:15 AM</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @else
+                                                            <!-- Chat message right -->
+                                                            <div class="d-flex justify-content-end text-end mb-1">
+                                                                <div class="w-100">
+                                                                    <div class="d-flex flex-column align-items-end">
+                                                                        <div
+                                                                            class="bg-primary text-white p-2 px-3 rounded-2">
+                                                                            With pleasure
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+
+
                                                         <!-- Chat message right -->
                                                         <div class="d-flex justify-content-end text-end mb-1">
                                                             <div class="w-100">
@@ -214,159 +287,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Chat message right -->
-                                                        <div class="d-flex justify-content-end text-end mb-1">
-                                                            <div class="w-100">
-                                                                <div class="d-flex flex-column align-items-end">
-                                                                    <div
-                                                                        class="bg-primary text-white p-2 px-3 rounded-2">
-                                                                        No visited raising gravity outward subject my
-                                                                        cottage Mr be.
-                                                                    </div>
-                                                                    <div class="d-flex my-2">
-                                                                        <div class="small text-secondary">6:20 AM</div>
-                                                                        <div class="small ms-2"><i
-                                                                                class="fa-solid fa-check-double text-info"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-1">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-2 px-3 rounded-2">
-                                                                            Please find the attached updated files
-                                                                        </div>
-                                                                        <!-- Files START -->
-                                                                        <!-- Files END -->
-                                                                        <div class="small my-2">12:16 PM</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-1">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-2 px-3 rounded-2">
-                                                                            How promotion excellent curiosity yet
-                                                                            attempted happiness Gay prosperous
-                                                                            impression😮
-                                                                        </div>
-                                                                        <div class="small my-2">3:22 PM</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-1">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-2 px-3 rounded-2">
-                                                                            <p class="small mb-0">Congratulations:)</p>
-                                                                            <div
-                                                                                class="card shadow-none p-2 border border-2 rounded mt-2">
-                                                                                <img
-                                                                                    src="https://via.placeholder.com/40"
-                                                                                    alt="">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="small my-2">3:22 PM</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message right -->
-                                                        <div class="d-flex justify-content-end text-end mb-1">
-                                                            <div class="w-100">
-                                                                <div class="d-flex flex-column align-items-end">
-                                                                    <div
-                                                                        class="bg-primary text-white p-2 px-3 rounded-2">
-                                                                        And sir dare view but over man So at within mr
-                                                                        to simple assure Mr disposing.
-                                                                    </div>
-                                                                    <!-- Images -->
-                                                                    <div class="d-flex my-2">
-                                                                        <div class="small text-secondary">5:35 PM</div>
-                                                                        <div class="small ms-2"><i
-                                                                                class="fa-solid fa-check"></i></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message right -->
-                                                        <div class="d-flex justify-content-end text-end mb-1">
-                                                            <div class="w-100">
-                                                                <div class="d-flex flex-column align-items-end">
-                                                                    <img class="rounded h-200px"
-                                                                         src="https://via.placeholder.com/40" alt="">
-                                                                    <div class="small my-2">5:36 PM</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat time -->
-                                                        <div class="text-center small my-2">2 New Messages</div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-2">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-2 px-3 rounded-2">
-                                                                            Traveling alteration impression 🤐 six all
-                                                                            uncommonly Chamber hearing inhabit joy
-                                                                            highest private.
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Chat message left -->
-                                                        <div class="d-flex mb-1">
-                                                            <div class="flex-shrink-0 avatar avatar-xs me-2">
-                                                                <img class="avatar-img rounded-circle"
-                                                                     src="https://via.placeholder.com/40" alt="">
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                <div class="w-100">
-                                                                    <div class="d-flex flex-column align-items-start">
-                                                                        <div
-                                                                            class="bg-light text-secondary p-3 rounded-2">
-                                                                            <div
-                                                                                class="typing d-flex align-items-center">
-                                                                                <div class="dot"></div>
-                                                                                <div class="dot"></div>
-                                                                                <div class="dot"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -386,8 +309,20 @@
 {{--                                            <div class="os-scrollbar-corner"></div>--}}
                                         </div>
                                         <!-- Chat conversation END -->
+                                        @endforeach
+
+
+
+
                                     </div>
                                     <!-- Conversation item END -->
+
+
+                                    @endforeach
+
+
+
+
                                     <!-- Conversation item START -->
                                     <div class="fade tab-pane h-100" id="chat-2" role="tabpanel"
                                          aria-labelledby="chat-2-tab">

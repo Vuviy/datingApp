@@ -18,7 +18,7 @@ class InterestFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->word(),
+            'name' => fake()->word().'-'.fake()->word().'-'.fake()->word(),
         ];
     }
 

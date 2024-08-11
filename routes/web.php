@@ -38,6 +38,19 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/chats', [\App\Http\Controllers\ChatController::class, 'allChats'])->name('allChats');
 
+
+    Route::post('/send_message' , [\App\Http\Controllers\ChatController::class, 'send_message'])->name('send_message');
+    Route::post('/aaa' , [\App\Http\Controllers\ChatController::class, 'aaa'])->name('aaa');
+
+//    aaaaa
+//    aaaaa
+//    aaaaa
+//    Route::get('/__chats', [\App\Http\Controllers\ChatController::class, 'oldChats'])->name('oldChats');
+//    Route::get('/kaka', [\App\Http\Controllers\ChatController::class, 'kaka'])->name('kaka');
+//    aaaaa
+//    aaaaa
+//    aaaaa
+
 });
 
 
