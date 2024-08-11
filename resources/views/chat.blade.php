@@ -1,6 +1,11 @@
 @extends('layouts.__base')
 
 @section('content')
+
+
+
+{{--    @dd($chat->lastMessage)--}}
+
     <div class="container">
         <div class="row gx-0">
             <!-- Sidebar START -->
@@ -74,10 +79,17 @@
                                                      style="padding: 0px; height: 100%; width: 100%;">
                                                     <ul class="nav flex-column nav-pills nav-pills-soft" role="tablist">
                                                         @foreach($chats as $chat)
+
+
+{{--                                                            @dd($chat_id)--}}
+{{--                                                            @dd(session('chat_id'))--}}
+
+
+{{--                                                            @dd($chat->lastMessage)--}}
                                                             <li data-bs-dismiss="offcanvas">
                                                                 <!-- Chat user tab item -->
                                                                 <a href="#chat-{{$chat->id}}"
-                                                                   class="ids-link nav-link text-start {{session('chat_id') == $chat->id ? 'active' : '' }}"
+                                                                   class="ids-link nav-link text-start {{$chat_id == $chat->id ? 'active' : '' }}"
                                                                    id="chat-{{$chat->id}}-tab" data-bs-toggle="pill"
                                                                    role="tab" aria-selected="false" tabindex="-1">
                                                                     <div class="d-flex">
@@ -104,7 +116,7 @@
                                                                                 @endif
                                                                             </h6>
                                                                             <div
-                                                                                class="small text-secondary">{{$chat->lastMessage->body}}</div>
+                                                                                class="small text-secondary">{{$chat->lastMessage ? $chat->lastMessage->body : ''}}</div>
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -145,20 +157,10 @@
                     <div class="card-body h-100">
                         <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
 
-
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-                            {{--    AAAAAAAAAAAAAAAAAAAAA        --}}
-
-
-
                             @foreach($chats as $chat)
                                 <!-- Conversation item START -->
                                 <div
-                                    class="fade tab-pane h-100 {{session('chat_id') == $chat->id ? 'show active' : '' }}"
+                                    class="fade tab-pane h-100 {{$chat_id == $chat->id ? 'show active' : '' }}"
                                     id="chat-{{$chat->id}}" role="tabpanel" aria-labelledby="chat-{{$chat->id}}-tab">
                                     <!-- Top avatar and status START -->
                                     <div class="d-sm-flex justify-content-between align-items-center">
@@ -326,6 +328,24 @@
             Chat END -->
 
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                        setTimeout(() => {
+
+                            // const messageContainer = document.querySelector('.message_container_' + inputElement.value);
+                            const messageContainer = document.querySelector('div.active').querySelector('div.os-content');
+
+                            // const div =  messageContainer.querySelector('div.os-content');
+
+                            const lastMessage = messageContainer.lastElementChild;
+                            if (lastMessage) {
+                                lastMessage.scrollIntoView({behavior: 'smooth'});
+                            }
+                        }, 300); // Невелика затримка для забезпечення оновлення DOM
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {

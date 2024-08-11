@@ -13,7 +13,7 @@
                 <div class="d-flex">
                     <h1 style="margin-right: 50px">{{ $user->name }}</h1>
 
-                    <a href="#" class="btn btn-primary text-uppercase" style="width: 100px; line-height: 50px; font-size: 20px">write</a>
+                    <a href="{{route('allChats', ['id' => $user->id])}}" class="btn btn-primary text-uppercase" style="width: 100px; line-height: 50px; font-size: 20px">write</a>
                 </div>
 {{--                <p>{{ $user->bio }}</p>--}}
                 <p>Вік: {{ $user->age }}</p>

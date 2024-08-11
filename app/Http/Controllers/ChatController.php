@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Events\StoreMessageEvent;
 use App\Filters\UserFilter;
+use App\Models\Chat;
 use App\Models\Interest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class ChatController extends Controller
 {
@@ -23,12 +25,40 @@ class ChatController extends Controller
     }
     public function allChats()
     {
-
         $user  = \auth()->user();
+
+        $userId = \request()->id;
+
+        $checkChats1 =  Chat::query()->where('sender_id', $user->id)->where('recipient_id', $userId)->first();
+        $checkChats2 =  Chat::query()->where('recipient_id', $user->id)->where('sender_id', $userId)->first();
+
+
+        if (!$checkChats1 && !$checkChats2){
+            $newChat = Chat::query()->create(['sender_id' => $user->id, 'recipient_id' => $userId]);
+        }
+
+
 
         $chats = $user->chats();
 
-        return view('chat', compact('chats'));
+        $chat_id = isset($newChat) ? $newChat->id : null;
+
+//        dd($chat_id);
+
+
+        if($checkChats1){
+
+//            dd($checkChats1);
+
+            $chat_id = $checkChats1->id;
+        }
+
+        if($checkChats2){
+            $chat_id = $checkChats2->id;
+        }
+
+
+        return view('chat', compact('chats'))->with('chat_id', $chat_id);
     }
 
 
