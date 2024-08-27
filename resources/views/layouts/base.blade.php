@@ -70,6 +70,35 @@
         }
     </style>
 
+{{--    <style>--}}
+{{--        .swal2-container {--}}
+{{--            z-index: 1050;--}}
+{{--            position: fixed;--}}
+{{--            top: 0;--}}
+{{--            left: 0;--}}
+{{--            width: 100%;--}}
+{{--            height: 100%;--}}
+{{--            display: flex;--}}
+{{--            align-items: center;--}}
+{{--            justify-content: center;--}}
+{{--            background: rgba(0, 0, 0, 0.4);--}}
+{{--        }--}}
+
+{{--        body.swal2-shown {--}}
+{{--            overflow: hidden !important;--}}
+{{--            padding-right: 0 !important;--}}
+{{--            position: fixed;--}}
+{{--            top: 0;--}}
+{{--            left: 0;--}}
+{{--            width: 100%;--}}
+{{--            height: 100%;--}}
+{{--        }--}}
+
+{{--        .swal2-popup {--}}
+{{--            z-index: 1060;--}}
+{{--        }--}}
+{{--    </style>--}}
+
 </head>
 <body>
     <!-- Хедер -->
@@ -99,10 +128,12 @@
 {{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>--}}
 {{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>--}}
 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('scripts')
 

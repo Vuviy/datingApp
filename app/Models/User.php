@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password',
         'gender',
         'age',
-        'online',
+        'last_activity',
     ];
 
     public function interests():BelongsToMany
@@ -55,67 +55,8 @@ class User extends Authenticatable
         return $marged->sortByDesc('updated_at');
     }
 
-
-
-//    public function chats()
-////    public function chats(): HasMany
-//    {
-//
-////        $sender = $this->hasMany(Message::class, 'sender_id')
-////            ->selectRaw('recipient_id, MAX(id) as id, MAX(body) as content, MAX(created_at) as created_at')
-////            ->groupBy('recipient_id');
-////
-////
-////
-////
-////
-////        $recepient = $this->hasMany(Message::class, 'recipient_id')
-////            ->selectRaw('recipient_id, MAX(id) as id, MAX(body) as content, MAX(created_at) as created_at')
-////            ->groupBy('sender_id');
-////
-//
-//
-//        $senderChats = $this->hasMany(Message::class, 'sender_id')
-//            ->selectRaw('recipient_id, MAX(sender_id) as sender_id, MAX(id) as id, MAX(body) as body, MAX(created_at) as created_at')
-//
-//            ->orderBy('id')
-//            ->groupBy('recipient_id');
-//
-//        $recipientChats = $this->hasMany(Message::class, 'recipient_id')
-//            ->selectRaw('sender_id, MAX(recipient_id) as recipient_id, MAX(id) as id, MAX(body) as body, MAX(created_at) as created_at')
-//            ->orderBy('id')
-//            ->groupBy('sender_id');
-//
-////        $senderChats = $this->hasMany(Message::class, 'sender_id')
-////            ->selectRaw('recipient_id as chat_user_id, MAX(sender_id) as sender_id, MAX(id) as id, MAX(body) as content, MAX(created_at) as created_at')
-////            ->groupBy('recipient_id');
-////
-////        $recipientChats = $this->hasMany(Message::class, 'recipient_id')
-////            ->selectRaw('sender_id as chat_user_id, MAX(recipient_id) as recipient_id, MAX(id) as id, MAX(body) as content, MAX(created_at) as created_at')
-////            ->groupBy('sender_id');
-//
-//        return $senderChats->union($recipientChats)->get();
-//
-////        return $sender;
-////        dd($sender);
-//
-//    }
-
-//    /**
-//     * The attributes that should be hidden for serialization.
-//     *
-//     * @var array<int, string>
-//     */
-//    protected $hidden = [
-//        'password',
-//    ];
-
-//    /**
-//     * The attributes that should be cast.
-//     *
-//     * @var array<string, string>
-//     */
-//    protected $casts = [
-//        'email_verified_at' => 'datetime',
-//    ];
+    public function offers():HasMany
+    {
+        return $this->hasMany(Offer::class);
+    }
 }

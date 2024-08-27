@@ -62,6 +62,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/'); // Перенаправлення на головну сторінку або будь-яку іншу сторінку
+        return redirect('/');
     }
 }

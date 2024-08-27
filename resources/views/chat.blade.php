@@ -2,9 +2,7 @@
 
 @section('content')
 
-
-
-{{--    @dd($chat->lastMessage)--}}
+    {{--    @dd($chat->lastMessage)--}}
 
     <div class="container">
         <div class="row gx-0">
@@ -80,12 +78,11 @@
                                                     <ul class="nav flex-column nav-pills nav-pills-soft" role="tablist">
                                                         @foreach($chats as $chat)
 
+                                                            {{--                                                            @dd($chat_id)--}}
+                                                            {{--                                                            @dd(session('chat_id'))--}}
 
-{{--                                                            @dd($chat_id)--}}
-{{--                                                            @dd(session('chat_id'))--}}
 
-
-{{--                                                            @dd($chat->lastMessage)--}}
+                                                            {{--                                                            @dd($chat->lastMessage)--}}
                                                             <li data-bs-dismiss="offcanvas">
                                                                 <!-- Chat user tab item -->
                                                                 <a href="#chat-{{$chat->id}}"
@@ -95,15 +92,9 @@
                                                                     <div class="d-flex">
                                                                         <div
                                                                             class="flex-shrink-0 avatar avatar-story me-2
-                                                                             @if(auth()->id() == $chat->recipient_id)
-                                                                               @if($chat->sender->online)
+                                                                             @if($chat->online)
                                                                                   status-online
-                                                                               @endif
-                                                                               @else
-                                                                               @if($chat->recipient->online)
-                                                                                  status-online
-                                                                               @endif
-@endif">
+                                                                               @endif">
                                                                             <img class="avatar-img rounded-circle"
                                                                                  src="" alt="">
                                                                         </div>
@@ -331,19 +322,14 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(() => {
+                    const messageContainer = document.querySelector('div.active').querySelector('div.os-content');
 
-                        setTimeout(() => {
-
-                            // const messageContainer = document.querySelector('.message_container_' + inputElement.value);
-                            const messageContainer = document.querySelector('div.active').querySelector('div.os-content');
-
-                            // const div =  messageContainer.querySelector('div.os-content');
-
-                            const lastMessage = messageContainer.lastElementChild;
-                            if (lastMessage) {
-                                lastMessage.scrollIntoView({behavior: 'smooth'});
-                            }
-                        }, 300); // Невелика затримка для забезпечення оновлення DOM
+                    const lastMessage = messageContainer.lastElementChild;
+                    if (lastMessage) {
+                        lastMessage.scrollIntoView({behavior: 'smooth'});
+                    }
+                }, 300); // Невелика затримка для забезпечення оновлення DOM
             });
         </script>
 
@@ -360,19 +346,12 @@
 
 
                         setTimeout(() => {
-
                             const messageContainer = document.querySelector('.message_container_' + inputElement.value);
                             const lastMessage = messageContainer.lastElementChild;
                             if (lastMessage) {
                                 lastMessage.scrollIntoView({behavior: 'smooth'});
                             }
-                        }, 100); // Невелика затримка для забезпечення оновлення DOM
-
-
-// if (messageContainer) {
-//     const lastMessage = messageContainer.lastElementChild;
-//     lastMessage.lastElementChild.scrollIntoView({behavior: 'smooth'});
-// }
+                        }, 100);
                         inputElement.value = hrefValue;
                     });
                 });
@@ -386,12 +365,15 @@
 
             btn.addEventListener('click', function (event) {
                 event.preventDefault();
-                const inputElement = document.querySelector('input[name="chat_id"]');
+                const linkActive = document.querySelector('a.active');
+                const hrefValue = linkActive.getAttribute('href').substring(6); // Remove the '#' character
+
+                // const inputElement = document.querySelector('input[name="chat_id"]');
                 const messageBody = document.querySelector('textarea[name="body"]');
-                const messageContainer = document.querySelector('.message_container_' + inputElement.value);
+                const messageContainer = document.querySelector('.message_container_' + hrefValue);
 
                 axios.post('/dating/datingApp/public/send_message', {
-                    chat_id: inputElement.value,
+                    chat_id: hrefValue,
                     body: messageBody.value,
                 })
                     .then(response => {

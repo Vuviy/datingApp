@@ -44,31 +44,15 @@ class InterestController extends Controller
     public function attach(int $interest, User $user)
     {
 
-//        $request->validate([
-//            'interest_id' => 'required|exists:interests,id',
-//        ]);
-//
-//        $user->interests()->attach($request->interest_id);
-
-//        $interests = $user->interests;
-
         if(!$user->interests->contains('id', $interest))
         {
             $user->interests()->attach($interest);
         }
 
-
-
-//        $user->interests()->attach($interest);
-
-//        return redirect()->back();
     }
 
     public function detach(Request $request, User $user)
     {
-
-//        dd($request);
-
 
         $request->validate([
             'interest_id' => 'required|exists:interests,id',
@@ -82,6 +66,10 @@ class InterestController extends Controller
 
     public function autocomplete(Request $request)
     {
+
+//        dd($request);
+
+
         $term = $request->get('term');
 
         $interests = Interest::where('name', 'LIKE', '%' . $term . '%')
