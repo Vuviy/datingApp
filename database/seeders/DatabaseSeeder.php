@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Interest;
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +22,18 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             InterestUserSeeder::class,
+        ]);
+
+        $this->call([
+            WalletSeeder::class,
+        ]);
+
+        $this->call([
+            BillingSeeder::class,
+        ]);
+
+        $this->call([
+            UserInfoSeeder::class,
         ]);
 
 

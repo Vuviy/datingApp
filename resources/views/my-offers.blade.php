@@ -36,7 +36,9 @@
                                     @foreach($offer->responds as $respond)
                                         <div class="d-flex justify-content-between bg-info mt-3">
                                             <p>{{$respond->comment}}</p>
-                                            <span><button class="btn btn-success">ok</button></span>
+                                            <a href="{{route('allChats', ['id' => $respond->user->id, 'respond' => $respond->id])}}" class="btn btn-primary"
+                                               style="width: 100px; line-height: 50px; font-size: 20px">write</a>
+{{--                                            <span><button class="btn btn-success">ok</button></span>--}}
                                         </div>
                                     @endforeach
 

@@ -23,22 +23,28 @@
 
                     @if(!auth()->user())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('loginForm')}}">Login</a>
+                            <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('loginForm')}}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('registerForm')}}">Register</a>
+                            <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('registerForm')}}">Register</a>
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('allChats')}}">Chats</a>
+                            <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('wallet')}}">Wallet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('billing')}}">Billing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('allChats')}}">Chats</a>
                         </li>
                         @if(!auth()->user()->name)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('profile')}}" >{{auth()->user()->email}}</a>
+                                <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('profile')}}" >{{auth()->user()->email}}</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('profile')}}" >{{auth()->user()->name}}</a>
+                                <a style="color: #ffffff; font-size: 19px; text-decoration: none; margin-right: 10px" href="{{route('profile')}}" >{{auth()->user()->name}}</a>
                             </li>
                         @endif
                         <form method="POST" action="{{ route('logout') }}">

@@ -16,15 +16,12 @@ class QueryFilter
 
         $this->request = $request;
     }
-
     public function filters()
     {
         return $this->request->query();
     }
-
     public function apply(Builder $builder)
     {
-
         $this->builder = $builder;
 
         foreach ($this->filters() as $name => $value) {
@@ -32,11 +29,7 @@ class QueryFilter
                 call_user_func_array([$this, $name], array_filter([$value]));
             }
         }
-        return $this->builder;
     }
-
-
-
     protected function paramToArray($param)
     {
 

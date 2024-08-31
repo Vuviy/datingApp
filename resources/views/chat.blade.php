@@ -77,12 +77,6 @@
                                                      style="padding: 0px; height: 100%; width: 100%;">
                                                     <ul class="nav flex-column nav-pills nav-pills-soft" role="tablist">
                                                         @foreach($chats as $chat)
-
-                                                            {{--                                                            @dd($chat_id)--}}
-                                                            {{--                                                            @dd(session('chat_id'))--}}
-
-
-                                                            {{--                                                            @dd($chat->lastMessage)--}}
                                                             <li data-bs-dismiss="offcanvas">
                                                                 <!-- Chat user tab item -->
                                                                 <a href="#chat-{{$chat->id}}"
@@ -164,8 +158,10 @@
                                                 <h6 class="mb-0 mt-1">
                                                     @if(auth()->id() == $chat->recipient_id)
                                                         {{$chat->sender->name}}
+                                                        ($ {{$chat->sender->billing->amount}})
                                                     @else
                                                         {{$chat->recipient->name}}
+                                                        ($ {{$chat->recipient->billing->amount}})
                                                     @endif
                                                 </h6>
                                                 <div class="small text-secondary"><i
@@ -302,13 +298,11 @@
                     <div class="card-footer">
                         <div class="">
                             <div class="d-sm-flex align-items-end">
-                                {{--                        <form action="{{route('send_message')}}" method="post" class="d-sm-flex align-items-end">--}}
                                 @csrf
                                 <input hidden name="chat_id">
                                 <textarea class="form-control mb-sm-0 mb-3" name="body" data-autoresize=""
                                           placeholder="Type a message" rows="1"></textarea>
                                 <button class="btn btn-sm btn-primary ms-2 send-message submit">send</button>
-                                {{--                        </form>--}}
                             </div>
                         </div>
                     </div>
@@ -344,6 +338,9 @@
                         const hrefValue = this.getAttribute('href').substring(6); // Remove the '#' character
                         const inputElement = document.querySelector('input[name="chat_id"]');
 
+                        // const btn = document.querySelector('.send-message');
+                        //
+                        // btn.textContent = hrefValue;
 
                         setTimeout(() => {
                             const messageContainer = document.querySelector('.message_container_' + inputElement.value);
@@ -382,22 +379,37 @@
                         messageDiv.classList.add('justify-content-end');
                         messageDiv.classList.add('text-end');
                         messageDiv.classList.add('mb-1');
-                        messageDiv.innerHTML = `
-<div class="w-100">
-<div class="d-flex flex-column align-items-end">
-<div class="bg-primary text-white p-2 px-3 rounded-2">${response.data.body}</div>
-<div class="d-flex my-2">
-<div class="small text-secondary">${response.data.time}</div>
-<div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
-</div>
-</div>
-</div>
-`;
-
+                        messageDiv.innerHTML = `<div class="w-100">
+                                                <div class="d-flex flex-column align-items-end">
+                                                <div class="bg-primary text-white p-2 px-3 rounded-2">${response.data.body}</div>
+                                                <div class="d-flex my-2">
+                                                <div class="small text-secondary">${response.data.time}</div>
+                                                <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
+                                                </div>
+                                                </div>
+                                                </div>`
                         messageContainer.appendChild(messageDiv);
                         messageDiv.scrollIntoView({behavior: 'smooth'});
                         messageBody.value = '';
-                    })
+                    }).catch(error => {
+                        alert(error.response.data.error)
+                        // const messageDiv = document.createElement('div');
+                        // messageDiv.classList.add('d-flex');
+                        // messageDiv.classList.add('justify-content-end');
+                        // messageDiv.classList.add('text-end');
+                        // messageDiv.classList.add('mb-1');
+                        // messageDiv.innerHTML = `<div class="w-100">
+                        //                         <div class="d-flex flex-column align-items-end">
+                        //                         <div class="bg-primary text-white p-2 px-3 rounded-2">${error.response.data.error}</div>
+                        //                         <div class="d-flex my-2">
+                        //                         <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
+                        //                         </div>
+                        //                         </div>
+                        //                         </div>`
+                        // messageContainer.appendChild(messageDiv);
+                        // messageDiv.scrollIntoView({behavior: 'smooth'});
+                        messageBody.value = '';
+                })
             })
         </script>
         <script>
@@ -413,7 +425,6 @@
                     window.Echo.private('store_message.' + hrefValue).listen('.store_message', response => {
 
                         const messageContainer = document.querySelector('.message_container_' + hrefValue);
-
                         const messageDiv = document.createElement('div');
                         messageDiv.classList.add('d-flex');
                         messageDiv.classList.add('mb-1');
@@ -426,7 +437,7 @@
 <div class="small my-2">${response.time}</div>
 </div>
 </div>
-</div>`;
+</div>`
 
                         messageContainer.appendChild(messageDiv);
 

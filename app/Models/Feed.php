@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class OfferRespond extends Model
+class Feed extends Model
 {
-
-    protected $fillable = ['user_id', 'offer_id', 'comment', 'status'];
-
     use HasFactory;
 
-    public function offer():BelongsTo
-    {
-        return $this->belongsTo(Offer::class);
-    }
+    protected $fillable = ['user_id', 'text', 'content', 'price'];
 
     public function user():BelongsTo
     {

@@ -21,6 +21,8 @@ use App\Http\Controllers\OfferController;
 //    return view('welcome');
 //});
 
+
+
 Route::middleware(['update_activity'])->group(function (){
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -37,12 +39,28 @@ Route::middleware(['update_activity'])->group(function (){
     Route::middleware(['auth'])->group(function (){
         Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
         Route::post('/edit', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('edit_profile');
+        Route::post('/edit_info', [\App\Http\Controllers\ProfileController::class, 'edit_info'])->name('edit_info');
 
         Route::get('/chats', [\App\Http\Controllers\ChatController::class, 'allChats'])->name('allChats');
 
         Route::post('/send_message' , [\App\Http\Controllers\ChatController::class, 'send_message'])->name('send_message');
-        Route::post('/aaa' , [\App\Http\Controllers\ChatController::class, 'aaa'])->name('aaa');
+
+
+        Route::get('/feed/{userId}' , [\App\Http\Controllers\FeedController::class, 'index'])->middleware('own_feed')->name('feed');
+        Route::post('/feed/create' , [\App\Http\Controllers\FeedController::class, 'create'])->name('create_feed');
+        Route::post('/feed/delete/{feedId}' , [\App\Http\Controllers\FeedController::class, 'delete'])->middleware('own_feed')->name('delete_feed');
+        Route::post('/feed/pay' , [\App\Http\Controllers\FeedController::class, 'pay'])->name('feed_pay');
+
+
+        Route::get('wallet', [\App\Http\Controllers\WalletController::class, 'index'])->name('wallet');
+        Route::post('wallet', [\App\Http\Controllers\WalletController::class, 'deposit'])->name('deposit');
+
+
+        Route::get('billing', [\App\Http\Controllers\BillingController::class, 'index'])->name('billing');
+        Route::post('set-billing', [\App\Http\Controllers\BillingController::class, 'setBilling'])->name('setBilling');
+
     });
+//    Route::post('/gamno/{feedId}' , [\App\Http\Controllers\FeedController::class, 'gamno_pay'])->name('gamno_pay');
 
 
     Route::get('/search', [HomeController::class, 'search'])->name('search');
@@ -71,4 +89,9 @@ Route::middleware(['update_activity'])->group(function (){
     });
 
 });
+
+//Route::get('/', function (){
+//    return 5;
+//});
+//Route::post('/tttt/{feedId}' , [\App\Http\Controllers\FeedController::class, 'gamno_pay'])->name('gamno_pay');
 

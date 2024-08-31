@@ -59,4 +59,35 @@ class User extends Authenticatable
     {
         return $this->hasMany(Offer::class);
     }
+
+    public function payedContents()
+//    public function payedContents():HasMany
+    {
+         return $this->hasMany(PayedContent::class, 'user_id')->pluck('feed_id')->unique()->toArray();
+    }
+
+    public function feeds():HasMany
+    {
+        return $this->hasMany(Feed::class)->orderByDesc('created_at');
+    }
+
+    public function responds():HasMany
+    {
+        return $this->hasMany(OfferRespond::class)->orderByDesc('created_at');
+    }
+
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function billing(): HasOne
+    {
+        return $this->hasOne(Billing::class);
+    }
+
+    public function info(): HasOne
+    {
+        return $this->hasOne(UserInfo::class);
+    }
 }

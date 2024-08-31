@@ -77,7 +77,7 @@ class OfferController extends Controller
 
     public function delete($id)
     {
-        $ii = Offer::query()->where('id', $id)->delete();
+        Offer::query()->where('id', $id)->delete();
 
         return redirect()->back();
 
