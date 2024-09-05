@@ -1,0 +1,39 @@
+FROM php:8.3-fpm
+
+# Оновлюємо пакети та встановлюємо необхідні залежності
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+    git \
+    curl \
+    htop \
+    cron \
+    unzip \
+    nano \
+    libicu-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Налаштовуємо та встановлюємо PHP-розширення
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install \
+        intl \
+        opcache \
+        zip \
+        pdo \
+        pdo_mysql \
+        bcmath \
+        sockets
+
+# Встановлюємо розширення через PECL
+RUN pecl install \
+    apcu \
+    amqp \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable \
+    apcu \
+    amqp
+
+# Додаємо Composer
+COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Створюємо каталог для Composer та встановлюємо права
+RUN mkdir -p /var/www/.composer && chown -R www-data:www-data /var/www/.composer

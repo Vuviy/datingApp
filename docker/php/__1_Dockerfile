@@ -1,0 +1,44 @@
+FROM php:8.3-fpm
+
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+		git \
+        curl \
+        htop \
+#        libmemcached-dev \
+        cron\
+        unzip \
+        nano \
+#        libicu-dev \
+#        zlib1g-dev \
+#        libssl-dev \
+#        pkg-config \
+#        libzip-dev \
+#        libpq-dev \
+#        librabbitmq-dev \
+#        libssh-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN set -xe \
+    && docker-php-ext-configure \
+        intl \
+    && docker-php-ext-install \
+        intl \
+        opcache \
+        zip \
+        pdo \
+        pdo_mysql \
+        bcmath \
+        sockets \
+    && pecl install \
+        apcu \
+        amqp \
+        && rm -rf /tmp/pear \
+    && docker-php-ext-enable \
+        apcu \
+        amqp
+
+
+COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+RUN mkdir -p /var/www/.composer && chown -R www-data /var/www/.composer
