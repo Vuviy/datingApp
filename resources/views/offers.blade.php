@@ -4,6 +4,13 @@
 @section('content')
 <main class="container my-5" style="display: block">
     <!-- Основний контент -->
+
+    <div>
+{{--    <div class="row justify-content-center">--}}
+        <a href="{{route('createOffer')}}" class="custom-btn btn-request mt-3">СТВОРИТИ ЗАПИТ</a>
+        <a href="{{route('myOffers', ['userId' => auth()->id()])}}" class="custom-btn btn-request mt-3">МОЇ ЗАПИТИ</a>
+        <a href="{{route('myRespond', ['userId' => auth()->id()])}}" class="custom-btn btn-request mt-3">МОЇ myRespond</a>
+    </div>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -28,7 +35,7 @@
                                 <input type="text" name="comment" class="form-control me-2" placeholder="Ваш коментар">
                                 <input type="text" name="offer_id" hidden value="{{$offer->id}}">
 
-                                <button {{$offer->disabled}} type="submit" class="btn btn-success">Відгукнутись</button>
+                                <button {{$offer->disabled}} type="submit" class="btn btn-success">{{$offer->disabled ? 'ви вже Відгукнулися' : 'Відгукнутись' }}</button>
                             </form>
                         </div>
                     </div>

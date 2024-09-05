@@ -107,7 +107,7 @@
                                 </div>
                                 @if($user->gender == 'female')
                                     <div class="mb-3">
-                                        <label for="boobs_size" class="form-label">Вік</label>
+                                        <label for="boobs_size" class="form-label">boobs_size</label>
                                         <input type="number" class="form-control" id="boobs_size" name="boobs_size"
                                                value="{{$user->info->boobs_size ?: ''}}">
                                     </div>

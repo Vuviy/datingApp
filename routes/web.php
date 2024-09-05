@@ -85,7 +85,9 @@ Route::middleware(['update_activity'])->group(function (){
         Route::post('/store', [OfferController::class, 'store'])->name('offers.store');
         Route::post('/respond', [OfferController::class, 'respond'])->name('offers.respond');
         Route::get('/{userId}', [OfferController::class, 'myOffers'])->middleware('own_offers')->name('myOffers');
+        Route::get('/my-respond/{userId}', [OfferController::class, 'myRespond'])->middleware('own_offers')->name('myRespond');
         Route::post('/delete/{offerId}', [OfferController::class, 'delete'])->middleware('own_offers')->name('offers.delete');
+        Route::post('/ignore', [OfferController::class, 'ignore'])->name('ignoreRespond');
     });
 
 });

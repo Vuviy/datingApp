@@ -15,13 +15,16 @@ class OfferController extends Controller
 {
     public function index()
     {
-        $offers = Offer::all();
+
+
+        $offers = Offer::query()->where('user_id', '!=',auth()->id())->get();
+
 
         foreach ($offers as $offer){
             $offer['disable'] = false;
             $responds = $offer->responds()->where('user_id', \auth()->id())->count();
 
-           if ($responds || $offer->user_id == auth()->id()){
+           if ($responds){
                $offer['disabled'] = 'disabled';
            }
 
@@ -34,7 +37,20 @@ class OfferController extends Controller
     {
 
         $offers = Offer::query()->where('user_id', $id)->get();
+
+        foreach ($offers as $offer){
+            foreach ($offer->responds as  $respond)
+                if ($respond->status != 3)
+                $respond->update(['status' => 2]);
+        }
+
         return view('my-offers', compact('offers'));
+    }
+
+    public function myRespond($id)
+    {
+        $responds = OfferRespond::query()->where('user_id', $id)->get();
+        return view('my-responds', compact('responds'));
     }
 
 
@@ -74,6 +90,28 @@ class OfferController extends Controller
         return redirect()->back();
     }
 
+
+    public function ignore(Request $request)
+    {
+
+        $respond = OfferRespond::query()->find($request->respondId);
+
+        if ($respond->offer->user_id !== \auth()->id()){
+            return redirect()->back()->withErrors('Something went wrong. Try again later');
+        }
+
+        if (!$respond){
+            return redirect()->back()->withErrors('$respond not found');
+        }
+
+
+        $respond->update(['status' => 3]);
+//        dd($respond);
+
+        return redirect()->route('myOffers', ['userId' => \auth()->id()]);
+
+
+    }
 
     public function delete($id)
     {

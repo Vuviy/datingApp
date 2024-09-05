@@ -15,50 +15,27 @@
                             </ul>
                         </div>
                     @endif
-                    @foreach($offers as $offer)
+                    @foreach($responds as $respond)
                         <div class="card border-primary mb-3" style="max-width: 600px; margin: 20px auto;">
                             <div class="card-body d-flex justify-content-between">
                                 <div>
-                                    <h5 class="card-title">{{$offer->name}}</h5>
-                                    <p class="card-text">{{$offer->description}}</p>
+                                    <h5 class="card-title">{{$respond->comment}}</h5>
+                                    <h5 class="card-title">{{$respond->offer->name}}</h5>
+                                    <p class="card-text">{{$respond->offer->description}}</p>
+                                    <p class="card-text">status: @switch($respond->status)
+                                            @case(1) ne pereglyanyto @break
+                                            @case(2) pereglyanyto @break
+                                            @case(3) ignored @break
+                                        @endswitch
+                                    </p>
                                 </div>
                                 <div>
-                                    <form action="{{route('offers.delete', ['offerId' => $offer->id])}}" id="deleteForm-{{$offer->id}}" method="post">
-                                        @csrf
-{{--                                        <button class="btn btn-danger" type="submit">delete</button>--}}
-                                        <button class="btn btn-danger deleteButton" data-id="{{$offer->id}}">Видалити</button>
-                                    </form>
+                                    {{--                                    <form action="{{route('offers.delete', ['offerId' => $offer->id])}}" id="deleteForm-{{$offer->id}}" method="post">--}}
+                                    {{--                                        @csrf--}}
+                                    {{--                                        <button class="btn btn-danger" type="submit">delete</button>--}}
+                                    {{--                                        <button class="btn btn-danger deleteButton" data-id="{{$offer->id}}">Видалити</button>--}}
+                                    {{--                                    </form>--}}
                                 </div>
-                            </div>
-                            <div class="card-footer bg-transparent">
-                                @if($offer->responds()->count())
-                                    <h5>Vidpovidi:</h5>
-                                    @foreach($offer->responds as $respond)
-                                        <div class="d-flex justify-content-between bg-info mt-3">
-                                            <p>{{$respond->comment}}</p>
-                                            <a href="{{route('allChats', ['id' => $respond->user->id, 'respond' => $respond->id])}}" class="btn btn-primary"
-                                               style="width: 100px; line-height: 50px; font-size: 20px">write</a>
-                                            @if($respond->status == 3)
-                                                <button class="btn btn-danger-soft">ignored</button>
-                                            @else
-                                            <form action="{{route('ignoreRespond')}}" method="post">
-                                                @csrf
-                                                <input hidden value="{{$respond->id}}" name="respondId">
-                                                <button class="btn btn-danger" type="submit">ignore</button>
-                                            </for
-                                            @endif
-                                        </div>
-                                    @endforeach
-
-                                @endif
-
-                                {{--                            <form class="d-flex" method="post" action="{{route('offers.respond')}}">--}}
-                                {{--                                @csrf--}}
-                                {{--                                <input type="text" name="comment" class="form-control me-2" placeholder="Ваш коментар">--}}
-                                {{--                                <input type="text" name="offer_id" hidden value="{{$offer->id}}">--}}
-
-                                {{--                                <button {{$offer->disabled}} type="submit" class="btn btn-success">Відгукнутись</button>--}}
-                                {{--                            </form>--}}
                             </div>
                         </div>
                     @endforeach
