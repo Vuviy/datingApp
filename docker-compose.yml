@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  php:
+    build: './docker/php'
+    volumes:
+      - './app:/var/www/html'
+    ports:
+      - 5173:5173
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - './app:/var/www/html'
+      - './docker/nginx/conf.d:/etc/nginx/conf.d'
+
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - './docker/db/mysql:/var/lib/mysql'
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8000:80
