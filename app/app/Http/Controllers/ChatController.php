@@ -20,22 +20,22 @@ use Illuminate\Support\Facades\Redirect;
 class ChatController extends Controller
 {
 
-    function getLoggedInUsers()
-    {
-        $data = DB::table(config('session.table'))
-            ->distinct()
-            ->select(['users.id'])
-            ->whereNotNull('user_id')
-            ->leftJoin('users', config('session.table') . '.user_id', '=', 'users.id')
-            ->get();
-
-        $response = [];
-
-        foreach ($data as $item) {
-            $response[] = $item->id;
-        }
-        return $response;
-    }
+//    function getLoggedInUsers()
+//    {
+//        $data = DB::table(config('session.table'))
+//            ->distinct()
+//            ->select(['users.id'])
+//            ->whereNotNull('user_id')
+//            ->leftJoin('users', config('session.table') . '.user_id', '=', 'users.id')
+//            ->get();
+//
+//        $response = [];
+//
+//        foreach ($data as $item) {
+//            $response[] = $item->id;
+//        }
+//        return $response;
+//    }
 
     function getActiveUsersInLastMinutes(int $minutes)
     {
@@ -90,14 +90,18 @@ class ChatController extends Controller
         }
 
         if (\request()->respond) {
+
+
             $respond = OfferRespond::query()->find(\request()->respond);
-            if ($respond && $respond->status == 1) {
-                $message = Message::query()->create([
-                    'user_id' => \auth()->id(),
-                    'chat_id' => $chat_id,
-                    'body' => 'Привіт, ти відгукнувся на мій запит. Тому я пишу тобу нахуй блять',
-                ]);
-                $respond->update(['status' => 2]);
+            if ($respond) {
+                if ($respond->status != 4){
+                    $message = Message::query()->create([
+                        'user_id' => \auth()->id(),
+                        'chat_id' => $chat_id,
+                        'body' => 'Привіт, ти відгукнувся на мій запит ('.$respond->offer->name.'). Тому я пишу тобу нахуй блять',
+                    ]);
+                    $respond->update(['status' => 4]);
+                }
             }
 
         }

@@ -17,16 +17,16 @@ class OfferController extends Controller
     {
 
 
-        $offers = Offer::query()->where('user_id', '!=',auth()->id())->get();
+        $offers = Offer::query()->where('user_id', '!=', auth()->id())->orderByDesc('created_at')->paginate(10);
 
 
-        foreach ($offers as $offer){
+        foreach ($offers as $offer) {
             $offer['disable'] = false;
             $responds = $offer->responds()->where('user_id', \auth()->id())->count();
 
-           if ($responds){
-               $offer['disabled'] = 'disabled';
-           }
+            if ($responds) {
+                $offer['disabled'] = 'disabled';
+            }
 
         }
 
@@ -36,12 +36,14 @@ class OfferController extends Controller
     public function myOffers($id)
     {
 
-        $offers = Offer::query()->where('user_id', $id)->get();
+        $offers = Offer::query()->where('user_id', $id)->orderByDesc('created_at')->get();
 
-        foreach ($offers as $offer){
-            foreach ($offer->responds as  $respond)
-                if ($respond->status != 3)
-                $respond->update(['status' => 2]);
+        foreach ($offers as $offer) {
+            foreach ($offer->responds as $respond) {
+                if ($respond->status == 1) {
+                    $respond->update(['status' => 2]);
+                }
+            }
         }
 
         return view('my-offers', compact('offers'));
@@ -66,13 +68,13 @@ class OfferController extends Controller
         $data = $request->only(['name', 'description']);
         $data['user_id'] = \auth()->id();
 
-       $offer = Offer::query()->create($data);
+        $offer = Offer::query()->create($data);
 
-       if(!$offer){
-           return redirect()->back()->withErrors('Something went wrong. Try again later');
-       }
+        if (!$offer) {
+            return redirect()->back()->withErrors('Something went wrong. Try again later');
+        }
 
-       return redirect()->route('myOffers', ['userId' => $data['user_id']]);
+        return redirect()->route('myOffers', ['userId' => $data['user_id']]);
     }
 
 
@@ -84,7 +86,7 @@ class OfferController extends Controller
 
         $respond = OfferRespond::query()->create($data);
 
-        if(!$respond){
+        if (!$respond) {
             return redirect()->back()->withErrors('Something went wrong. Try again later');
         }
         return redirect()->back();
@@ -96,11 +98,11 @@ class OfferController extends Controller
 
         $respond = OfferRespond::query()->find($request->respondId);
 
-        if ($respond->offer->user_id !== \auth()->id()){
+        if ($respond->offer->user_id !== \auth()->id()) {
             return redirect()->back()->withErrors('Something went wrong. Try again later');
         }
 
-        if (!$respond){
+        if (!$respond) {
             return redirect()->back()->withErrors('$respond not found');
         }
 

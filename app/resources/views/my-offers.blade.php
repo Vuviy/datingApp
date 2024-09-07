@@ -23,10 +23,12 @@
                                     <p class="card-text">{{$offer->description}}</p>
                                 </div>
                                 <div>
-                                    <form action="{{route('offers.delete', ['offerId' => $offer->id])}}" id="deleteForm-{{$offer->id}}" method="post">
+                                    <form action="{{route('offers.delete', ['offerId' => $offer->id])}}"
+                                          id="deleteForm-{{$offer->id}}" method="post">
                                         @csrf
-{{--                                        <button class="btn btn-danger" type="submit">delete</button>--}}
-                                        <button class="btn btn-danger deleteButton" data-id="{{$offer->id}}">Видалити</button>
+                                        {{--                                        <button class="btn btn-danger" type="submit">delete</button>--}}
+                                        <button class="btn btn-danger deleteButton" data-id="{{$offer->id}}">Видалити
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -36,17 +38,32 @@
                                     @foreach($offer->responds as $respond)
                                         <div class="d-flex justify-content-between bg-info mt-3">
                                             <p>{{$respond->comment}}</p>
-                                            <a href="{{route('allChats', ['id' => $respond->user->id, 'respond' => $respond->id])}}" class="btn btn-primary"
+                                            <a href="{{route('allChats', ['id' => $respond->user->id, 'respond' => $respond->id])}}"
+                                               class="btn btn-primary"
                                                style="width: 100px; line-height: 50px; font-size: 20px">write</a>
-                                            @if($respond->status == 3)
-                                                <button class="btn btn-danger-soft">ignored</button>
-                                            @else
-                                            <form action="{{route('ignoreRespond')}}" method="post">
-                                                @csrf
-                                                <input hidden value="{{$respond->id}}" name="respondId">
-                                                <button class="btn btn-danger" type="submit">ignore</button>
-                                            </form
-                                            @endif
+
+                                            @switch($respond->status)
+                                                @case(3)<button class="btn btn-danger-soft">ignored</button> @break;
+                                                @case(4)<button class="btn btn-danger-soft">ви вже написали</button> @break;
+                                                <form action="{{route('ignoreRespond')}}" method="post">
+                                                    @csrf
+                                                    <input hidden value="{{$respond->id}}" name="respondId">
+                                                    <button class="btn btn-danger" type="submit">ignore</button>
+                                                </form
+                                            @endswitch
+{{--                                            @if($respond->status == 3)--}}
+{{--                                                <button class="btn btn-danger-soft">ignored</button>--}}
+{{--                                            @elseif($respond->status == 4)--}}
+{{--                                                <button class="btn btn-check">ви вже написали</button>--}}
+{{--                                            @else--}}
+{{--                                                <form action="{{route('ignoreRespond')}}" method="post">--}}
+{{--                                                    @csrf--}}
+{{--                                                    <input hidden value="{{$respond->id}}" name="respondId">--}}
+{{--                                                    <button class="btn btn-danger" type="submit">ignore</button>--}}
+{{--                                                </form--}}
+{{--                                            @endif--}}
+
+
                                         </div>
                                     @endforeach
 
@@ -71,38 +88,38 @@
 
 @section('scripts')
 
-<script>
+    <script>
 
 
-    document.querySelectorAll('.deleteButton').forEach(button => {
+        document.querySelectorAll('.deleteButton').forEach(button => {
 
 
             // console.log(5555);
 
-        button.addEventListener('click', function (event) {
-            event.preventDefault(); // Зупиняємо стандартну поведінку кнопки
-            const recordId = this.getAttribute('data-id');
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Зупиняємо стандартну поведінку кнопки
+                const recordId = this.getAttribute('data-id');
 
-            Swal.fire({
-                title: 'Ви впевнені?',
-                text: "Цей запис буде видалено назавжди!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Так, видалити!',
-                cancelButtonText: 'Скасувати'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log(`Запис з ID ${recordId} видалено.`);
-                    // Виконайте реальне видалення, наприклад, відправка форми
-                    document.getElementById('deleteForm-' + recordId).submit();
-                }
+                Swal.fire({
+                    title: 'Ви впевнені?',
+                    text: "Цей запис буде видалено назавжди!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Так, видалити!',
+                    cancelButtonText: 'Скасувати'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log(`Запис з ID ${recordId} видалено.`);
+                        // Виконайте реальне видалення, наприклад, відправка форми
+                        document.getElementById('deleteForm-' + recordId).submit();
+                    }
+                });
             });
         });
-    });
 
-</script>
+    </script>
 @endsection
 
 

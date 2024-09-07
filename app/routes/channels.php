@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Log;
 
 
 Broadcast::channel('store_message.{chat_id}', function ($user, $chatId) {
-//    return (int) $user->id === (int) $id;
-
-//    return 0;
     return $user->chats()->where('id', $chatId)->count();
 });
 
