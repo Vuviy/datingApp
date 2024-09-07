@@ -15,7 +15,6 @@ services:
     volumes:
       - './app:/var/www/html'
       - './docker/nginx/conf.d:/etc/nginx/conf.d'
-      - './app/resources:/usr/share/nginx/html'
 
   db:
     image: mysql
