@@ -9,7 +9,7 @@ services:
       - 5173:5173
 
   nginx:
-    image: nginx
+    image: nginx:1.27.2
     ports:
       - 80:80
     volumes:
@@ -17,13 +17,13 @@ services:
       - './docker/nginx/conf.d:/etc/nginx/conf.d'
 
   db:
-    image: mysql
+    image: mysql:9.0.1
     environment:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - './docker/db/mysql:/var/lib/mysql'
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:5.2.1
     ports:
       - 8000:80
