@@ -16,12 +16,22 @@ services:
       - './app:/var/www/html'
       - './docker/nginx/conf.d:/etc/nginx/conf.d'
 
+#  db:
+#    image: mysql:9.0.1
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#    volumes:
+#      - './docker/db/mysql:/var/lib/mysql'
+
   db:
     image: mysql:9.0.1
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - './docker/db/mysql:/var/lib/mysql'
+    container_name: db
+
 
   phpmyadmin:
     image: phpmyadmin:5.2.1
