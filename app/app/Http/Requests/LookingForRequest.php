@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class InfoRequest extends FormRequest
+class LookingForRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +24,8 @@ class InfoRequest extends FormRequest
     public function rules()
     {
         return [
+            'age' => 'nullable|numeric|min:1|max:254',
+            'gender' => 'nullable|numeric|min:1|max:2',
             'height' => 'nullable|numeric|min:1|max:254',
             'weight' => 'nullable|numeric|min:1|max:254',
             'hair_color' => 'nullable|numeric|min:1|max:5',

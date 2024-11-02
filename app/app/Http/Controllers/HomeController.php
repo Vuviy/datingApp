@@ -22,12 +22,19 @@ class HomeController extends Controller
 
         $peoples = User::filter($filter)->where('users.id', '!=', Auth::id())->paginate(3)->withQueryString();
 
+
+//        dd($peoples);
+
         return view('search', compact('peoples'));
     }
 
 
-    public function userProfile(User $user)
+    public function userProfile($userId)
     {
+
+
+        $user = User::query()->find($userId);
+
         return view('user-profile', compact('user'));
     }
 

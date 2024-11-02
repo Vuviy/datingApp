@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Contracts\IFilter;
 use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,7 +37,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Interest::class);
     }
 
-    public function scopeFilter(Builder $builder, QueryFilter $filter)
+    public function scopeFilter(Builder $builder, IFilter $filter)
     {
 
         return $filter->apply($builder);
@@ -89,5 +89,10 @@ class User extends Authenticatable
     public function info(): HasOne
     {
         return $this->hasOne(UserInfo::class);
+    }
+
+    public function fastDateInfo(): HasOne
+    {
+        return $this->hasOne(FastDateInfo::class);
     }
 }
