@@ -215,7 +215,7 @@
 
 
 
-                                        @foreach()
+{{--                                        @foreach()--}}
                                         <!-- Chat conversation START -->
                                         <div
                                             class="chat-conversation-content custom-scrollbar os-host os-theme-dark os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
@@ -309,7 +309,7 @@
 {{--                                            <div class="os-scrollbar-corner"></div>--}}
                                         </div>
                                         <!-- Chat conversation END -->
-                                        @endforeach
+{{--                                        @endforeach--}}
 
 
 
@@ -735,7 +735,7 @@
                                                         </li>
                                                         <li class="avatar avatar-xs">
                                                             <img class="avatar-img rounded-circle"
-                                                                 src="https://via.placeholder.com/40"" alt="avatar">
+                                                                 src="https://via.placeholder.com/40" alt="avatar">
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -317,13 +317,19 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => {
-                    const messageContainer = document.querySelector('div.active').querySelector('div.os-content');
 
-                    const lastMessage = messageContainer.lastElementChild;
-                    if (lastMessage) {
-                        lastMessage.scrollIntoView({behavior: 'smooth'});
+                    let divActive = document.querySelector('div.active');
+
+                    if (divActive) {
+                        const messageContainer = document.querySelector('div.active').querySelector('div.os-content');
+
+                        const lastMessage = messageContainer.lastElementChild;
+                        if (lastMessage) {
+                            lastMessage.scrollIntoView({behavior: 'smooth'});
+                        }
+
                     }
-                }, 300); // Невелика затримка для забезпечення оновлення DOM
+                }, 300);
             });
         </script>
 
@@ -369,7 +375,7 @@
                 const messageBody = document.querySelector('textarea[name="body"]');
                 const messageContainer = document.querySelector('.message_container_' + hrefValue);
 
-                axios.post( "{{route('send_message')}}", {
+                axios.post("{{route('send_message')}}", {
                     chat_id: hrefValue,
                     body: messageBody.value,
                 })
@@ -392,23 +398,23 @@
                         messageDiv.scrollIntoView({behavior: 'smooth'});
                         messageBody.value = '';
                     }).catch(error => {
-                        alert(error.response.data.error)
-                        // const messageDiv = document.createElement('div');
-                        // messageDiv.classList.add('d-flex');
-                        // messageDiv.classList.add('justify-content-end');
-                        // messageDiv.classList.add('text-end');
-                        // messageDiv.classList.add('mb-1');
-                        // messageDiv.innerHTML = `<div class="w-100">
-                        //                         <div class="d-flex flex-column align-items-end">
-                        //                         <div class="bg-primary text-white p-2 px-3 rounded-2">${error.response.data.error}</div>
-                        //                         <div class="d-flex my-2">
-                        //                         <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
-                        //                         </div>
-                        //                         </div>
-                        //                         </div>`
-                        // messageContainer.appendChild(messageDiv);
-                        // messageDiv.scrollIntoView({behavior: 'smooth'});
-                        messageBody.value = '';
+                    alert(error.response.data.error)
+                    // const messageDiv = document.createElement('div');
+                    // messageDiv.classList.add('d-flex');
+                    // messageDiv.classList.add('justify-content-end');
+                    // messageDiv.classList.add('text-end');
+                    // messageDiv.classList.add('mb-1');
+                    // messageDiv.innerHTML = `<div class="w-100">
+                    //                         <div class="d-flex flex-column align-items-end">
+                    //                         <div class="bg-primary text-white p-2 px-3 rounded-2">${error.response.data.error}</div>
+                    //                         <div class="d-flex my-2">
+                    //                         <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
+                    //                         </div>
+                    //                         </div>
+                    //                         </div>`
+                    // messageContainer.appendChild(messageDiv);
+                    // messageDiv.scrollIntoView({behavior: 'smooth'});
+                    messageBody.value = '';
                 })
             })
         </script>
