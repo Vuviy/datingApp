@@ -18,25 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(100)->create();
+//         User::factory(100)->create();
+//
+//         Interest::factory(100)->create();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-         Interest::factory(100)->create();
-
-         Offer::factory(199)->create();
+//         Offer::factory(199)->create();
          Feed::factory(199)->create();
-=======
-//         Offer::factory(199)->create();
-//         Feed::factory(199)->create();
->>>>>>> 3cbd4e352c08a3a17ff0e6f4a47749f41ae8fd81
-
-        $this->call([
-            InterestUserSeeder::class,
-        ]);
-=======
-//         Offer::factory(199)->create();
-//         Feed::factory(199)->create();
 
 //        $this->call([
 //            InterestUserSeeder::class,
@@ -53,25 +40,11 @@ class DatabaseSeeder extends Seeder
 //        $this->call([
 //            UserInfoSeeder::class,
 //        ]);
-//
-//        $this->call([
-//            FastDateInfoSeeder::class
-//        ]);
-<<<<<<< HEAD
->>>>>>> 3cbd4e352c08a3a17ff0e6f4a47749f41ae8fd81
-=======
->>>>>>> 3cbd4e352c08a3a17ff0e6f4a47749f41ae8fd81
 
-        $this->call([
-            WalletSeeder::class,
-        ]);
 
-        $this->call([
-            BillingSeeder::class,
-        ]);
-
-        $this->call([
-            UserInfoSeeder::class,
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }
