@@ -18,33 +18,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         User::factory(100)->create();
-//
-//         Interest::factory(100)->create();
+        User::factory(100)->create();
 
-//         Offer::factory(199)->create();
-         Feed::factory(199)->create();
+        Interest::factory(100)->create();
 
-//        $this->call([
-//            InterestUserSeeder::class,
-//        ]);
-//
-//        $this->call([
-//            WalletSeeder::class,
-//        ]);
-//
-//        $this->call([
-//            BillingSeeder::class,
-//        ]);
-//
-//        $this->call([
-//            UserInfoSeeder::class,
-//        ]);
+        Offer::factory(199)->create();
+        Feed::factory(199)->create();
 
+        $this->call([
+            InterestUserSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            WalletSeeder::class,
+        ]);
+
+        $this->call([
+            BillingSeeder::class,
+        ]);
+
+        $this->call([
+            UserInfoSeeder::class,
+        ]);
+
     }
 }
