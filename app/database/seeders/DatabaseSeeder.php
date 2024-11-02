@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
 //         Interest::factory(100)->create();
 
 //         Offer::factory(199)->create();
-         Feed::factory(199)->create();
+//         Feed::factory(199)->create();
 
 //        $this->call([
 //            InterestUserSeeder::class,
@@ -39,6 +39,10 @@ class DatabaseSeeder extends Seeder
 //
 //        $this->call([
 //            UserInfoSeeder::class,
+//        ]);
+//
+//        $this->call([
+//            FastDateInfoSeeder::class
 //        ]);
 
 

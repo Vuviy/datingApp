@@ -22,6 +22,8 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            $table-> tinyInteger('age')->nullable()->unsigned();
+            $table-> tinyInteger('gender')->nullable()->unsigned();
             $table-> tinyInteger('height')->nullable()->unsigned();
             $table-> tinyInteger('weight')->nullable()->unsigned();
             $table-> tinyInteger('hair_color')->nullable()->unsigned();

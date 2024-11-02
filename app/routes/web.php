@@ -56,15 +56,37 @@ Route::middleware(['update_activity'])->group(function (){
         Route::post('wallet', [\App\Http\Controllers\WalletController::class, 'deposit'])->name('deposit');
 
 
+        Route::get('first-date');
+
+        Route::prefix('fast-date')->group(function (){
+            Route::get('/', [\App\Http\Controllers\FastDateController::class, 'index'])->name('fast-date');
+            Route::get('/{userId}/looking-for', [\App\Http\Controllers\FastDateController::class, 'createForm'])->name('lookingFor');
+            Route::post('/looking-for', [\App\Http\Controllers\FastDateController::class, 'store'])->name('looking-for.store');
+            Route::get('/{userId}/my-perfect', [\App\Http\Controllers\FastDateController::class, 'myPerfect'])->name('myPerfect');
+        });
+
+
         Route::get('billing', [\App\Http\Controllers\BillingController::class, 'index'])->name('billing');
         Route::post('set-billing', [\App\Http\Controllers\BillingController::class, 'setBilling'])->name('setBilling');
+
+
+        Route::prefix('offers')->group(function (){
+            Route::get('/', [OfferController::class, 'index'])->name('offers');
+            Route::get('/create', [OfferController::class, 'createForm'])->name('createOffer');
+            Route::post('/store', [OfferController::class, 'store'])->name('offers.store');
+            Route::post('/respond', [OfferController::class, 'respond'])->name('offers.respond');
+            Route::get('/{userId}', [OfferController::class, 'myOffers'])->middleware('own_offers')->name('myOffers');
+            Route::get('/my-respond/{userId}', [OfferController::class, 'myRespond'])->middleware('own_offers')->name('myRespond');
+            Route::post('/delete/{offerId}', [OfferController::class, 'delete'])->middleware('own_offers')->name('offers.delete');
+            Route::post('/ignore', [OfferController::class, 'ignore'])->name('ignoreRespond');
+        });
 
     });
 //    Route::post('/gamno/{feedId}' , [\App\Http\Controllers\FeedController::class, 'gamno_pay'])->name('gamno_pay');
 
 
     Route::get('/search', [HomeController::class, 'search'])->name('search');
-    Route::get('/users/{user}/user-profile', [HomeController::class, 'userProfile'])->name('userProfile');
+    Route::get('/users/{userId}/user-profile', [HomeController::class, 'userProfile'])->name('userProfile');
 
 
     //Route::get('interests', [InterestController::class, 'index'])->name('interests.index');

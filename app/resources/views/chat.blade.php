@@ -323,7 +323,7 @@
                     if (lastMessage) {
                         lastMessage.scrollIntoView({behavior: 'smooth'});
                     }
-                }, 300); // Невелика затримка для забезпечення оновлення DOM
+                }, 300);
             });
         </script>
 
@@ -337,10 +337,6 @@
 
                         const hrefValue = this.getAttribute('href').substring(6); // Remove the '#' character
                         const inputElement = document.querySelector('input[name="chat_id"]');
-
-                        // const btn = document.querySelector('.send-message');
-                        //
-                        // btn.textContent = hrefValue;
 
                         setTimeout(() => {
                             const messageContainer = document.querySelector('.message_container_' + inputElement.value);

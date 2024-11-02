@@ -25,14 +25,14 @@ class InfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'height' => 'numeric|min:1|max:254',
-            'weight' => 'numeric|min:1|max:254',
-            'hair_color' => 'numeric|min:1|max:5',
-            'boobs_size' => 'numeric|min:0|max:254',
-            'ass_girth' => 'numeric|min:1|max:254',
-            'waistline' => 'numeric|min:1|max:254',
-            'dick_length' => 'numeric|min:1|max:254',
-            'goal_here' => 'numeric|min:1|max:3',
+            'height' => 'nullable|numeric|min:1|max:254',
+            'weight' => 'nullable|numeric|min:1|max:254',
+            'hair_color' => 'nullable|numeric|min:1|max:5',
+            'boobs_size' => 'nullable|numeric|min:0|max:254',
+            'ass_girth' => 'nullable|numeric|min:1|max:254',
+            'waistline' => 'nullable|numeric|min:1|max:254',
+            'dick_length' => 'nullable|numeric|min:1|max:254',
+            'goal_here' => 'nullable|numeric|min:1|max:3',
         ];
     }
 }

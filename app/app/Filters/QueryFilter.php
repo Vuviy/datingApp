@@ -2,10 +2,11 @@
 
 namespace App\Filters;
 
+use App\Contracts\IFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-class QueryFilter
+class QueryFilter implements IFilter
 {
     public $request;
     protected $builder;
@@ -22,6 +23,19 @@ class QueryFilter
     }
     public function apply(Builder $builder)
     {
+        $builder->leftJoin('user_infos', 'users.id', '=', 'user_infos.user_id')
+            ->select([
+                'users.*',
+                'user_infos.hair_color',
+                'user_infos.height',
+                'user_infos.weight',
+                'user_infos.waistline',
+                'user_infos.boobs_size',
+                'user_infos.ass_girth',
+                'user_infos.dick_length',
+                'user_infos.goal_here',
+            ]);
+
         $this->builder = $builder;
 
         foreach ($this->filters() as $name => $value) {
@@ -30,7 +44,7 @@ class QueryFilter
             }
         }
     }
-    protected function paramToArray($param)
+    public function paramToArray($param)
     {
 
         return explode($this->delimiter, $param);

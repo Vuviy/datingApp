@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <img
-                        src="{{$user->gender != 'female' ? 'https://th-thumbnailer.cdn-si-edu.com/5a79C6jJ8BrChMX5tgEKiMI_qqo=/1000x750/filters:no_upscale():focal(792x601:793x602)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/52/e4/52e44474-c2dc-41e0-bb77-42a904695196/this-image-shows-a-portrait-of-dragon-man-credit-chuang-zhao_web.jpg' : 'https://pbs.twimg.com/profile_images/1221735342937645067/MGMXudrc_400x400.jpg'}}"
+                        src="{{$user->gender != '2' ? 'https://th-thumbnailer.cdn-si-edu.com/5a79C6jJ8BrChMX5tgEKiMI_qqo=/1000x750/filters:no_upscale():focal(792x601:793x602)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/52/e4/52e44474-c2dc-41e0-bb77-42a904695196/this-image-shows-a-portrait-of-dragon-man-credit-chuang-zhao_web.jpg' : 'https://pbs.twimg.com/profile_images/1221735342937645067/MGMXudrc_400x400.jpg'}}"
                         alt="{{ $user->name }}" class="img-fluid rounded-circle mb-3">
                 </div>
                 <div class="col-md-8">
@@ -20,7 +20,7 @@
                         @endif
                     </div>
                     <p>Вік: {{ $user->age }}</p>
-                    <p>Стать: {{ $user->gender }}</p>
+                    <p>Стать: {{ $user->gender == 1 ? 'Male' : 'Female'}}</p>
 
                     <h3>Interests</h3>
                     <ul>
